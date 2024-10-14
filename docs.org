@@ -1,0 +1,26 @@
+#+title: Docs
+- embed code-128 data in barcode.rkt
+- generate barcode from "location" "eventid" "userid"
+- location is a string and the last 2 are ints
+  - location 'code-c eventid 'fnc1 userid
+    with the fnc1 code used to make a difference between the fields
+- write out to PPM
+- use imagemagick to convert out to png
+- write the png to s3
+
+* AWS LAMBDA
+- use [[https://www.lambrospetrou.com/articles/aws-lambda-meets-racket][this]] to get racket code to within the lambda
+  as racketscript is non-functional due to some import error.
+
+- the main problem will be with using imagemagick-native/similar with npm
+  either
+  - docker
+  - or somehow getting it to install on my machine.
+    then copying that into the lambda function zip
+    that or using the docker for a dev env and then uploading that zip
+** w/docker
+get imagemagick-native npm package to work on docker
+get racket-minimal on that image
+get the code to output a ppm
+use imagemagick to output to s3 bucket as a png
+upload to aws
